@@ -36,23 +36,10 @@ lefthook install
 
 ### 他のプロジェクトで使う場合
 
-`template` ブランチにはレビューシステムの動作に必要なファイルのみが含まれています。既存プロジェクトに `.git` のネスト構造を作らずに導入するには、アーカイブを直接ダウンロードして展開します：
+`template` ブランチにはレビューシステムの動作に必要なファイルのみが含まれています。プロジェクトルートで以下の1行を実行すると、ファイルの展開・依存パッケージのインストール・git フックの登録まで一括で行えます：
 
 ```sh
-curl -sL https://github.com/taka1156/skills/archive/refs/heads/template.tar.gz \
-  | tar -xz --strip-components=1
-```
-
-これにより、`.git` フォルダを含まずカレントディレクトリにファイルが展開されます。
-
-展開後、依存パッケージをインストールして git フックを登録します：
-
-```sh
-# jq・lefthook・github-cli をインストール（要 root）
-sudo bash scripts/install.sh
-
-# git フックの登録・gh 認証確認
-bash scripts/setup.sh
+curl -sL https://raw.githubusercontent.com/taka1156/skills/master/scripts/bootstrap.sh | bash
 ```
 
 ## 使い方
@@ -111,6 +98,7 @@ bash scripts/run-copilot-review.sh --lang=en
 ```
 .github/skills/          # Copilot スキル定義
 scripts/
+  bootstrap.sh           # 他プロジェクト導入用ワンライナー（curl で取得して実行）
   install.sh             # jq / lefthook / github-cli をインストール
   setup.sh               # git フックを登録・gh 認証確認
   run-copilot-review.sh  # Copilot API を呼び出してレビュー結果を生成

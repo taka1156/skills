@@ -36,23 +36,10 @@ lefthook install
 
 ### Using in Another Project
 
-The `template` branch contains only the files needed to run the review system. To add them to an existing project without a nested `.git` directory, download the archive directly:
+The `template` branch contains only the files needed to run the review system. Run the following one-liner in your project root to extract the files, install dependencies, and register git hooks:
 
 ```sh
-curl -sL https://github.com/taka1156/skills/archive/refs/heads/template.tar.gz \
-  | tar -xz --strip-components=1
-```
-
-This extracts the files into the current directory with no `.git` folder included.
-
-After extracting, install the required packages and register the git hooks:
-
-```sh
-# Install jq, lefthook, and github-cli (requires root)
-sudo bash scripts/install.sh
-
-# Register git hooks and check gh authentication
-bash scripts/setup.sh
+curl -sL https://raw.githubusercontent.com/taka1156/skills/master/scripts/bootstrap.sh | bash
 ```
 
 ## Usage
@@ -111,6 +98,7 @@ This repository contains two Copilot skill definitions under `.github/skills/`:
 ```
 .github/skills/          # Copilot skill definitions
 scripts/
+  bootstrap.sh           # One-liner setup for other projects (fetched via curl)
   install.sh             # Installs jq, lefthook, and github-cli
   setup.sh               # Registers git hooks and checks gh authentication
   run-copilot-review.sh  # Calls Copilot API and generates review.md
