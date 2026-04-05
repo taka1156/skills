@@ -42,6 +42,16 @@ The `template` branch contains only the files needed to run the review system. R
 curl -sL https://raw.githubusercontent.com/taka1156/skills/master/scripts/bootstrap.sh | bash
 ```
 
+> **Security Notice:** Always review the script contents before executing it. Running scripts piped directly from the internet (especially with `sudo`) carries a risk of MITM attacks. You can inspect the script first by running:
+> ```sh
+> curl -sL https://raw.githubusercontent.com/taka1156/skills/master/scripts/bootstrap.sh
+> ```
+>
+> When reviewing, check for the following:
+> - Destructive commands such as `sudo`, `rm -rf`, or privilege escalation
+> - Unexpected outbound connections to external servers
+> - Packages being installed or files being modified outside the expected scope
+
 ## Usage
 
 ### Automatic (on push)

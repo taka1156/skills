@@ -42,6 +42,16 @@ lefthook install
 curl -sL https://raw.githubusercontent.com/taka1156/skills/master/scripts/bootstrap.sh | bash
 ```
 
+> **セキュリティに関する注意:** 実行前に必ずスクリプトの内容を確認してください。インターネット上のスクリプトをパイプで直接実行する方法（特に `sudo` を伴う場合）は、MITM攻撃のリスクがあります。以下のコマンドで事前に内容を確認できます：
+> ```sh
+> curl -sL https://raw.githubusercontent.com/taka1156/skills/master/scripts/bootstrap.sh
+> ```
+>
+> 確認するべきポイント：
+> - `sudo` や `rm -rf` など破壊的なコマンドや権限昇格が含まれていないか
+> - 想定外の外部サーバーへの通信が含まれていないか
+> - インストールされるパッケージや変更されるファイルが意図した範囲内か
+
 ## 使い方
 
 ### 自動実行（push 時）
