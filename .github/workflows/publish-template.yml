@@ -23,7 +23,7 @@ jobs:
             ".github/skills/git-hook-code-review/SKILL.md"
             "copilot-review/.gitkeep"
             "lefthook.yml"
-            "review-check.sh"
+            "scripts/review-check.sh"
           )
 
           # 一時ディレクトリに対象ファイルをコピー

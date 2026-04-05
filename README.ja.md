@@ -108,7 +108,7 @@ bash scripts/run-copilot-review.sh --lang=en
 .github/skills/          # Copilot スキル定義
 scripts/
   run-copilot-review.sh  # Copilot API を呼び出してレビュー結果を生成
-review-check.sh          # レビュー結果を確認し、must 問題があれば push をブロック
+  review-check.sh        # レビュー結果を確認し、must 問題があれば push をブロック
 lefthook.yml             # git フック設定
 copilot-review/          # レビュー出力ディレクトリ（gitignore 済み）
 ```

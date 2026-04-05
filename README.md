@@ -108,7 +108,7 @@ This repository contains two Copilot skill definitions under `.github/skills/`:
 .github/skills/          # Copilot skill definitions
 scripts/
   run-copilot-review.sh  # Calls Copilot API and generates review.md
-review-check.sh          # Checks review result and blocks push on must issues
+  review-check.sh        # Checks review result and blocks push on must issues
 lefthook.yml             # Git hook configuration
 copilot-review/          # Review output directory (gitignored)
 ```

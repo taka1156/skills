@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SKILL_FILE=".github/skills/git-hook-code-review/SKILL.md"
-REVIEW_SCRIPT="./review-check.sh"
+REVIEW_SCRIPT="./scripts/review-check.sh"
 LANG_OPT="ja"
 
 if [ ! -f "$SKILL_FILE" ]; then
