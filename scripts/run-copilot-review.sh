@@ -5,6 +5,16 @@ SKILL_FILE=".github/skills/git-hook-code-review/SKILL.md"
 REVIEW_SCRIPT="./review-check.sh"
 LANG_OPT="ja"
 
+if [ ! -f "$SKILL_FILE" ]; then
+  echo "エラー: スキルファイルが見つかりません: ${SKILL_FILE}" >&2
+  exit 1
+fi
+
+if [ ! -f "$REVIEW_SCRIPT" ]; then
+  echo "エラー: レビュースクリプトが見つかりません: ${REVIEW_SCRIPT}" >&2
+  exit 1
+fi
+
 # オプション解析
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -38,15 +48,20 @@ fi
 SYSTEM_PROMPT=$(awk 'BEGIN{p=0} /^---/{p++; next} p>=2{print}' "$SKILL_FILE")
 
 # GitHub Copilot APIトークンを取得
-GH_TOKEN=$(gh auth token)
+GH_TOKEN=$(gh auth token 2>/dev/null || true)
+if [ -z "$GH_TOKEN" ]; then
+  echo "エラー: GitHubトークンの取得に失敗しました。'gh auth login' で認証してください。" >&2
+  exit 1
+fi
+
 COPILOT_TOKEN=$(curl -sf \
   -H "Authorization: token ${GH_TOKEN}" \
   -H "Accept: application/json" \
   "https://api.github.com/copilot_internal/v2/token" | jq -r '.token')
 
 if [ -z "$COPILOT_TOKEN" ] || [ "$COPILOT_TOKEN" = "null" ]; then
-  echo "警告: Copilot APIトークンの取得に失敗しました。レビューをスキップします。" >&2
-  exit 0
+  echo "エラー: Copilot APIトークンの取得に失敗しました。GitHub Copilotのサブスクリプションと権限を確認してください。" >&2
+  exit 1
 fi
 
 # Copilot Chat APIを呼び出し
@@ -72,8 +87,8 @@ RESULT=$(curl -sf \
   -d "$REQUEST" | jq -r '.choices[0].message.content')
 
 if [ -z "$RESULT" ] || [ "$RESULT" = "null" ]; then
-  echo "警告: Copilotのレビュー結果が空です。レビューをスキップします。" >&2
-  exit 0
+  echo "エラー: Copilotのレビュー結果の取得に失敗しました。APIの応答を確認してください。" >&2
+  exit 1
 fi
 
 # コードブロック記法が含まれる場合は除去してJSONのみ抽出

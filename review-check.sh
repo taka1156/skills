@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [ -z "${RESULT:-}" ]; then
-  echo "エラー: RESULT環境変数が設定されていません" >&2
+  echo "エラー: RESULT環境変数が設定されていません。run-copilot-review.sh 経由で実行してください。" >&2
   exit 1
 fi
 
