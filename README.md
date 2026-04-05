@@ -34,6 +34,23 @@ Install lefthook and set up the git hooks:
 lefthook install
 ```
 
+### Using in Another Project
+
+The `template` branch contains only the files needed to run the review system. To add them to an existing project without a nested `.git` directory, download the archive directly:
+
+```sh
+curl -sL https://github.com/taka1156/skills/archive/refs/heads/template.tar.gz \
+  | tar -xz --strip-components=1
+```
+
+This extracts the files into the current directory with no `.git` folder included.
+
+After extracting, install the git hooks:
+
+```sh
+lefthook install
+```
+
 ## Usage
 
 ### Automatic (on push)

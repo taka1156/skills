@@ -34,6 +34,23 @@ lefthook をインストールして git フックを登録します：
 lefthook install
 ```
 
+### 他のプロジェクトで使う場合
+
+`template` ブランチにはレビューシステムの動作に必要なファイルのみが含まれています。既存プロジェクトに `.git` のネスト構造を作らずに導入するには、アーカイブを直接ダウンロードして展開します：
+
+```sh
+curl -sL https://github.com/taka1156/skills/archive/refs/heads/template.tar.gz \
+  | tar -xz --strip-components=1
+```
+
+これにより、`.git` フォルダを含まずカレントディレクトリにファイルが展開されます。
+
+展開後、git フックを登録します：
+
+```sh
+lefthook install
+```
+
 ## 使い方
 
 ### 自動実行（push 時）
