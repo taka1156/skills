@@ -124,7 +124,7 @@ EMOJI_must="🔴"; EMOJI_want="🟠"; EMOJI_imo="🟡"; EMOJI_imho="🟡"; EMOJI
       EMOJI="${!EMOJI_VAR}"
       echo "$RESULT" | jq -r --arg p "$PRIORITY" --arg e "$EMOJI" '
         .issues[] | select(.priority == $p) |
-        "\($e) **\(.priority) — \(.title)**（行: \(.line)）\n\(.detail)\n\n> 修正案: \(.recommendation)\n\n---\n"
+        "\($e) **\(.priority) — \(.title)**（行: \(.line)）\n\n\(.detail)\n\n> 修正案: \(.recommendation)\n\n---\n"
       '
     done
   fi
