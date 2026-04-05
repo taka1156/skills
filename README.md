@@ -45,10 +45,14 @@ curl -sL https://github.com/taka1156/skills/archive/refs/heads/template.tar.gz \
 
 This extracts the files into the current directory with no `.git` folder included.
 
-After extracting, install the git hooks:
+After extracting, install the required packages and register the git hooks:
 
 ```sh
-lefthook install
+# Install jq, lefthook, and github-cli (requires root)
+sudo bash scripts/install.sh
+
+# Register git hooks and check gh authentication
+bash scripts/setup.sh
 ```
 
 ## Usage
@@ -107,6 +111,8 @@ This repository contains two Copilot skill definitions under `.github/skills/`:
 ```
 .github/skills/          # Copilot skill definitions
 scripts/
+  install.sh             # Installs jq, lefthook, and github-cli
+  setup.sh               # Registers git hooks and checks gh authentication
   run-copilot-review.sh  # Calls Copilot API and generates review.md
   review-check.sh        # Checks review result and blocks push on must issues
 lefthook.yml             # Git hook configuration

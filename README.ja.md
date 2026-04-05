@@ -45,10 +45,14 @@ curl -sL https://github.com/taka1156/skills/archive/refs/heads/template.tar.gz \
 
 これにより、`.git` フォルダを含まずカレントディレクトリにファイルが展開されます。
 
-展開後、git フックを登録します：
+展開後、依存パッケージをインストールして git フックを登録します：
 
 ```sh
-lefthook install
+# jq・lefthook・github-cli をインストール（要 root）
+sudo bash scripts/install.sh
+
+# git フックの登録・gh 認証確認
+bash scripts/setup.sh
 ```
 
 ## 使い方
@@ -107,6 +111,8 @@ bash scripts/run-copilot-review.sh --lang=en
 ```
 .github/skills/          # Copilot スキル定義
 scripts/
+  install.sh             # jq / lefthook / github-cli をインストール
+  setup.sh               # git フックを登録・gh 認証確認
   run-copilot-review.sh  # Copilot API を呼び出してレビュー結果を生成
   review-check.sh        # レビュー結果を確認し、must 問題があれば push をブロック
 lefthook.yml             # git フック設定

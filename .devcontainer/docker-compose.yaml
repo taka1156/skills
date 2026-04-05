@@ -1,6 +1,8 @@
 services:
     app:
-      build: .
+      build:
+        context: ../
+        dockerfile: .devcontainer/Dockerfile
       tty: true
       volumes:
         - ../:/workspace

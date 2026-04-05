@@ -9,7 +9,6 @@ ENV LANG=ja_JP.UTF-8 \
 
 RUN <<-EOF
 set -e
-curl -1sLf 'https://dl.cloudsmith.io/public/evilmartians/lefthook/setup.alpine.sh' | bash
 
 apk add --no-cache \
   bash \
@@ -20,11 +19,12 @@ apk add --no-cache \
   vim \
   curl \
   musl-locales \
-  musl-locales-lang \
-  jq \
-  lefthook \
-  github-cli
+  musl-locales-lang
 EOF
+
+# jq / lefthook / github-cli は install.sh でインストール
+COPY scripts/install.sh /usr/local/bin/install.sh
+RUN chmod +x /usr/local/bin/install.sh && /usr/local/bin/install.sh
 
 RUN git lfs install
 
